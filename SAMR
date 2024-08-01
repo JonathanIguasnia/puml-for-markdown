@@ -1,0 +1,77 @@
+class Paciente {
+  + ID: int
+  + Nombre: string
+  + Edad: int
+  + Dirección: string
+  + InformaciónMédica: string
+  + ContactoEmergencia: string
+  + Estado: string
+  + SolicitarAyuda(): void
+  + ActualizarInformacion(): void
+}
+
+class CentroAsistencia {
+  + ID: int
+  + Nombre: string
+  + Dirección: string
+  + Contacto: string
+  + RecibirSolicitud(): void
+  + AsignarProfesional(): void
+}
+
+class SolicitudAyuda {
+  + ID: int
+  + FechaHora: datetime
+  + Tipo: string
+  + Estado: string
+  + PacienteID: int
+  + ProfesionalID: int
+  + ActualizarEstado(): void
+  + GenerarRegistro(): void
+}
+
+class ProfesionalSalud {
+  + ID: int
+  + Nombre: string
+  + Especialidad: string
+  + Contacto: string
+  + Diagnosticar(): void
+  + TratarPaciente(): void
+}
+
+class MonitorMedico {
+  + ID: int
+  + Tipo: string
+  + LecturaActual: string
+  + PacienteID: int
+  + ObtenerLectura(): void
+  + GenerarAlerta(): void
+}
+
+class HistorialClinico {
+  + ID: int
+  + PacienteID: int
+  + Fecha: datetime
+  + Detalles: string
+  + ActualizarHistorial(): void
+  + ConsultarHistorial(): void
+}
+
+class Usuario {
+  + ID: int
+  + NombreUsuario: string
+  + Clave: string
+  + Rol: string
+  + Autenticar(): void
+  + AsignarRol(): void
+}
+
+Paciente "1" -- "0..*" MonitorMedico
+Paciente "1" -- "0..*" SolicitudAyuda
+CentroAsistencia "1" -- "0..*" SolicitudAyuda
+CentroAsistencia "1" -- "0..*" ProfesionalSalud
+ProfesionalSalud "1" -- "0..*" SolicitudAyuda
+SolicitudAyuda "*" -- "1" Paciente
+SolicitudAyuda "*" -- "1" ProfesionalSalud
+Paciente "1" -- "1" HistorialClinico
+@enduml
